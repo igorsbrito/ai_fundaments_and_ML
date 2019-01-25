@@ -348,7 +348,3 @@ if answer == "yes":
     assert len(types) == 3, "TAREFA 12: Há 3 tipos de gênero!"
     assert sum(counts) == 1551505, "TAREFA 12: Resultado de retorno incorreto!"
     # -----------------------------------------------------
-
-
-
-
