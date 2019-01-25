@@ -2,10 +2,10 @@
 
 # Começando com os imports
 import csv
+import math
 
 import matplotlib
 matplotlib.use('TkAgg')
-
 import matplotlib.pyplot as plt
 
 # Vamos ler os dados como uma lista
@@ -208,7 +208,46 @@ print("resposta:", answer)
 assert answer != "Escreva sua resposta aqui.", "TAREFA 8: Escreva sua própria resposta!"
 # -----------------------------------------------------
 
+input("Aperte Enter para continuar...")
+# Vamos trabalhar com trip_duration (duração da viagem) agora. Não conseguimos tirar alguns valores dele.
+# TAREFA 9
+# TODO: Ache a duração de viagem Mínima, Máxima, Média, e Mediana.
+# Você não deve usar funções prontas para isso, como max() e min().
+trip_duration_list = column_to_list(data_list, 2)
+min_trip = 0.
+max_trip = 0.
+mean_trip = 0.
+median_trip = 0.
 
+trip_duration_list = [int(element) for element in trip_duration_list]
+trip_duration_list.sort()
+
+min_trip = min(trip_duration_list)
+max_trip = max(trip_duration_list)
+mean_trip = sum(trip_duration_list)/len(trip_duration_list)
+
+length_trips_list = len(trip_duration_list)
+
+#check if the length of the list is not evel
+if length_trips_list % 2 != 0:
+    
+    half_index = math.floor(length_trips_list/2)
+    median_trip = trip_duration_list[half_index+1]
+
+else:
+
+    half_index = math.floor(length_trips_list/2)
+    median_trip = trip_duration_list[half_index]+trip_duration_list[half_index+1]/2
+
+print("\nTAREFA 9: Imprimindo o mínimo, máximo, média, e mediana")
+print("Min: ", min_trip, "Max: ", max_trip, "Média: ", mean_trip, "Mediana: ", median_trip)
+
+# ------------ NÃO MUDE NENHUM CÓDIGO AQUI ------------
+assert round(min_trip) == 60, "TAREFA 9: min_trip com resultado errado!"
+assert round(max_trip) == 86338, "TAREFA 9: max_trip com resultado errado!"
+assert round(mean_trip) == 940, "TAREFA 9: mean_trip com resultado errado!"
+assert round(median_trip) == 670, "TAREFA 9: median_trip com resultado errado!"
+# -----------------------------------------------------
 
 
 

@@ -1,2 +1,3 @@
 venv/*
 chicago_bikeshare_pt/chicago.csv
+.DS_Store
