@@ -58,6 +58,15 @@ input("Aperte Enter para continuar...")
 # TAREFA 3
 # TODO: Crie uma função para adicionar as colunas(features) de uma lista em outra lista, na mesma ordem
 def column_to_list(data, index):
+    """
+        Função que seleciona um coluna do data.
+        Argumentos:
+            data: arrray de arrays.
+            index:o index da coluna a ser retornada.
+        Retorno:
+            Uma lista com os dados da coluna index.
+        
+    """
     column_list = []
     # Dica: Você pode usar um for para iterar sobre as amostras, pegar a feature pelo seu índice, e dar append para uma lista
     for element in data:
@@ -103,6 +112,13 @@ input("Aperte Enter para continuar...")
 # TODO: Crie uma função para contar os gêneros. Retorne uma lista.
 # Isso deveria retornar uma lista com [count_male, count_female] (exemplo: [10, 15] significa 10 Masculinos, 15 Femininos)
 def count_gender(data_list):
+    """
+        Função que conta o número de males e females.
+        Argumentos:
+            data_list: array de arrays.
+        Retorno:
+            array com a quantidade de male`s e female`s respectivamente.
+    """
     male = 0
     female = 0
 
@@ -130,6 +146,13 @@ input("Aperte Enter para continuar...")
 # TODO: Crie uma função que pegue o gênero mais popular, e retorne este gênero como uma string.
 # Esperamos ver "Male", "Female", ou "Equal" como resposta.
 def most_popular_gender(data_list):
+    """
+        Função que verifica o gênero mais popular.
+        Argumento:
+            data_list: array de arrays
+        Retorno:
+            retorna a string referente ao gênero ou 'equal' se os valores forem iguais
+    """
     answer = ""
 
     male, femele = count_gender(data_list)
@@ -172,16 +195,23 @@ print("\nTAREFA 7: Verifique o gráfico!")
 
 
 def count_user_type(data_list):
-	subscriber = 0
-	customer = 0
+    """
+        Função que conta o número de cada tipo de usuário.
+        Argumentos:
+            data_list:array de arrays
+        Retorno:
+            retorna um array com o número de subscriber e customer respectivamente
+    """
+    subscriber = 0
+    customer = 0
 
-	for data_element in data_list:
-		if data_element[-3] == 'Subscriber':
-			subscriber += 1
-		elif data_element[-3] == 'Customer':
-			customer += 1
+    for data_element in data_list:
+        if data_element[-3] == 'Subscriber':
+            subscriber += 1
+        elif data_element[-3] == 'Customer':
+            customer += 1
 
-	return [subscriber, customer]
+    return [subscriber, customer]
 
 gender_list = column_to_list(data_list, -3)
 types = ["Subscriber", "Customer"]
@@ -249,8 +279,75 @@ assert round(mean_trip) == 940, "TAREFA 9: mean_trip com resultado errado!"
 assert round(median_trip) == 670, "TAREFA 9: median_trip com resultado errado!"
 # -----------------------------------------------------
 
+input("Aperte Enter para continuar...")
+# TAREFA 10
+# Gênero é fácil porque nós temos apenas algumas opções. E quanto a start_stations? Quantas opções ele tem?
+# TODO: Verifique quantos tipos de start_stations nós temos, usando set()
+start_stations = set(column_to_list(data_list,3))
+
+print("\nTAREFA 10: Imprimindo as start stations:")
+print(len(start_stations))
+print(start_stations)
+
+# ------------ NÃO MUDE NENHUM CÓDIGO AQUI ------------
+assert len(start_stations) == 582, "TAREFA 10: Comprimento errado de start stations."
+# -----------------------------------------------------
+
+input("Aperte Enter para continuar...")
+# TAREFA 11
+# Volte e tenha certeza que você documentou suas funções. Explique os parâmetros de entrada, a saída, e o que a função faz. Exemplo:
+# def new_function(param1: int, param2: str) -> list:
+"""
+  Função de exemplo com anotações.
+  Argumentos:
+      param1: O primeiro parâmetro.
+      param2: O segundo parâmetro.
+  Retorna:
+      Uma lista de valores x.
+
+  """
+
+input("Aperte Enter para continuar...")
+# TAREFA 12 - Desafio! (Opcional)
+# TODO: Crie uma função para contar tipos de usuários, sem definir os tipos
+# para que nós possamos usar essa função com outra categoria de dados.
+print("Você vai encarar o desafio? (yes ou no)")
+answer = "yes"
+
+def count_items(column_list):
+    """
+        Função que calcula a quantidade de cada tipo de valor diferente em um array
+        Argumentos:
+            column_list: Array
+        Retorno
+            duas listas, uma com os diferentes tipos de valores e outra com a quantidade desses tipos, respectivamente
+    """
+    item_types = []
+    count_items = []
+
+    item_types = list(set(column_list))
+    count_items = [0 for i in range(len(item_types))]
+
+    for element in column_list:
+        try:
+            index = item_types.index(element)
+            count_items[index] += 1
+
+        except ValueError:
+            pass
+
+    return item_types, count_items
 
 
+if answer == "yes":
+    # ------------ NÃO MUDE NENHUM CÓDIGO AQUI ------------
+    column_list = column_to_list(data_list, -2)
+    types, counts = count_items(column_list)
+    print("\nTAREFA 12: Imprimindo resultados para count_items()")
+    print("Tipos:", types, "Counts:", counts)
+    assert len(types) == 3, "TAREFA 12: Há 3 tipos de gênero!"
+    assert sum(counts) == 1551505, "TAREFA 12: Resultado de retorno incorreto!"
+    # -----------------------------------------------------
 
 
 
