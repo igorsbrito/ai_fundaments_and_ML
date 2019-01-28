@@ -204,17 +204,21 @@ def count_user_type(data_list):
     """
     subscriber = 0
     customer = 0
+    dependent = 0
 
     for data_element in data_list:
         if data_element[-3] == 'Subscriber':
             subscriber += 1
         elif data_element[-3] == 'Customer':
             customer += 1
+        elif data_element[-3] == 'Dependent':
+            dependent += 1
 
-    return [subscriber, customer]
+
+    return [subscriber, customer, dependent]
 
 gender_list = column_to_list(data_list, -3)
-types = ["Subscriber", "Customer"]
+types = ["Subscriber", "Customer", "Dependent"]
 quantity = count_user_type(data_list)
 y_pos = list(range(len(types)))
 plt.bar(y_pos, quantity)
@@ -252,9 +256,23 @@ median_trip = 0.
 trip_duration_list = [int(element) for element in trip_duration_list]
 trip_duration_list.sort()
 
-min_trip = min(trip_duration_list)
-max_trip = max(trip_duration_list)
-mean_trip = sum(trip_duration_list)/len(trip_duration_list)
+trip_sum_total = 0 
+min_trip  =  100000
+
+for data_duration in trip_duration_list:
+    #verifica se essa trip_duration é menor que a menor já encontrada
+    if data_duration < min_trip:
+        min_trip = data_duration
+
+    #verifica se essa trip_duration é a maior que a maior já encontrada
+    elif data_duration > max_trip:
+        max_trip = data_duration
+
+    #adiciona ess trip_duration na soma total de todas as trio_duration`s
+    trip_sum_total += data_duration
+
+
+mean_trip = trip_sum_total/len(trip_duration_list)
 
 length_trips_list = len(trip_duration_list)
 
@@ -341,7 +359,7 @@ def count_items(column_list):
 
 if answer == "yes":
     # ------------ NÃO MUDE NENHUM CÓDIGO AQUI ------------
-    column_list = column_to_list(data_list, -2)
+    column_list = column_to_list(data_list, -3)
     types, counts = count_items(column_list)
     print("\nTAREFA 12: Imprimindo resultados para count_items()")
     print("Tipos:", types, "Counts:", counts)
